@@ -11,7 +11,9 @@ TA Julia Dickerman approved rubric on 11/22
 # Languages/Frameworks used (25 points)
 
 Learned/Used React.js frontend (10 points)
+
 Learned/Used Express backend (10 points)
+
 Learned/Used PostgreSQL Database (5 points)
 
 # Functionality (55 points)
