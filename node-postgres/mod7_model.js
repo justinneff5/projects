@@ -20,11 +20,11 @@ const getUsers = () => {
   const createUser = (body) => {
     return new Promise(function(resolve, reject) {
       const { username, password } = body
-      pool.query('INSERT INTO users (username, password) VALUES ($1, $2) RETURNING *', [username, password], (error, results) => {
+      pool.query("INSERT INTO users (username, password) VALUES ($1, $2)", [username, password], (error, results) => { //used to have a RETURNING * at end of sql statement
         if (error) {
           reject(error)
         }
-        resolve(`A new user has been added added: ${results.rows[0]}`)
+        resolve(`A new user has been added added: `) //${results.rows[0]} was after
       })
     })
   }
