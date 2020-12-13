@@ -89,6 +89,30 @@ router.post("/status", async (req, res) => {
   }
 });
 
+router.post("/getstatus", async (req, res) => {
+  const { username } = req.body;
+  try {
+    const retStatus = await pool.query("SELECT status from users where username = $1", [username]);
+    res.json(retStatus.rows[0]);
+  }
+  catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
+router.post("/getrisk", async (req, res) => {
+  const { username } = req.body;
+  try {
+    const retRisk = await pool.query("SELECT status from users where username = $1", [username]);
+    res.json(retStatus.rows[0]);
+  }
+  catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
 // router.post("/verify", (req, res) => {
 //   try {
 //     res.json(true);
