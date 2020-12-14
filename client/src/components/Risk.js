@@ -3,14 +3,14 @@ import { Link, Redirect } from "react-router-dom";
 
 // import { toast } from "react-toastify";
 
-const Status = ({updateStatus, status}) => {
-const [myStatus, updateMyStatus] = useState(status)
+const Risk = ({updateRisk, risk}) => {
+const [myRisk, updateMyRisk] = useState(risk)
 const onSubmitForm = async e => {
     e.preventDefault();
     try {
-      const body = { username: localStorage.getItem("token"), status: myStatus };
+      const body = { username: localStorage.getItem("token"), risk: myRisk };
       const response = await fetch(
-        "http://localhost:3001/authentication/status",
+        "http://localhost:3001/authentication/risk",
         {
           method: "POST",
           headers: {
@@ -22,7 +22,7 @@ const onSubmitForm = async e => {
       // const parseRes = await response.json();
       // setAuth(true);
       if (response.status === 200) {
-        updateStatus(myStatus);
+        updateRisk(myRisk);
       }
       // const parseRes = await response.json();
       // console.log(parseRes);
@@ -42,28 +42,36 @@ const onSubmitForm = async e => {
 
   return (
     <Fragment>
-      <h3 className="mt-5">Update COVID Status!</h3>
+      <h3 className="mt-5">Log your current symptoms!</h3>
       <form onSubmit={onSubmitForm}>
         <input
-          type="radio"
-          checked = {myStatus === "positive"}
-          name="positive"
-          value="positive"
-          onChange={e => updateMyStatus("positive")}
+          type="checkbox"
+          checked = {myRisk === "some "}
+          name="fever"
+          value="fever"
+          onChange={e => updateMyRisk("some ")}
           className="form-control my-3"
-        /> Positive
+        /> Feel like you have had a fever?
         <input
-          type="radio"
-          checked = {myStatus === "negative"}
-          name="negative"
-          value="negative"
-          onChange={e => updateMyStatus("negative")}
+          type="checkbox"
+          checked = {myRisk === "some"}
+          name="chills"
+          value="chills"
+          onChange={e => updateMyRisk("some")}
           className="form-control my-3"
-        /> Negative
+        /> Chills?
+        <input
+          type="checkbox"
+          checked = {myRisk === "low"}
+          name="low"
+          value="low"
+          onChange={e => updateMyRisk("low")}
+          className="form-control my-3"
+        /> None of the above
         <button className="btn btn-success btn-block">Submit</button>
       </form>
     </Fragment>
   );
 };
 
-export default Status;
+export default Risk;

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Status from "./Status";
+import Risk from "./Risk";
 // import { toast } from "react-toastify";
 
 const Dashboard = ({ setAuth }) => {
   const [name, setName] = useState("");
   const [status, setStatus] = useState("");
+  const [risk, setRisk] = useState("");
 
   const getProfile = async () => {
     try {
@@ -23,6 +25,7 @@ const Dashboard = ({ setAuth }) => {
       // console.log(parseData);
       setName(parseData.username);
       setStatus(parseData.status);
+      setRisk(parseData.risk);
     } catch (err) {
       console.error(err.message);
     }
@@ -49,9 +52,12 @@ const Dashboard = ({ setAuth }) => {
       <br></br>
       <h2>Welcome, {name}</h2>
       <br></br>
+      <h2>Based off of your current symptoms, you have {risk} risk of COVID!</h2>
+      <br></br>
       <h2>Current COVID Status: {status}</h2>
       <br></br>
       <Status updateStatus = {setStatus} status = {status}/>
+      <Risk updateRisk = {setRisk} risk = {risk}/>
       <button onClick={e => logout(e)} className="btn btn-primary">
         Logout
       </button>
