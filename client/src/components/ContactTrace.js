@@ -2,18 +2,18 @@ import React, { Fragment, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 
 function compileDataArr(data) {
-    let retArr = [];
-    let i;
-    let count = Object.keys(data).length;
-    for (i = 0; i < count; i++) {
-        retArr.push(JSON.parse(data.rows[i]).user2);
-    }
-    return retArr;
+  let retArr = [];
+  let i;
+  let count = Object.keys(data).length;
+  for (i = 0; i < count; i++) {
+      retArr.push(data[i].user2);
+      }
+  return retArr;
 }
 
 function compileDataStatus(data) {
     let retStr;
-    retStr = JSON.parse(data).status;
+    retStr = data.status;
     return retStr;
 }
 
@@ -22,15 +22,17 @@ function compileDataStatus(data) {
 //     return retStr;
 // }
 
-function getAllConnections(username) {
+function getAllConnections(username, homeusername, primusername) {
     let user = username;
+    let home = homeusername;
+    let prim = primusername;
     let retDat;
-    fetch('http://localhost:3001/authentication/getAllConnections', {
+    fetch('http://localhost:3001/other/getAllConnections', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({user}),
+      body: JSON.stringify({user1 : user, homeuser : home, primuser : prim}),
     })
     .then(response => response.json())
     .then(data => {
@@ -75,7 +77,7 @@ function getAllConnections(username) {
 
   function updateRisk(username) {
     let user = username;
-    fetch('http://localhost:3001/risk', {
+    fetch('http://localhost:3001/authentication/risk', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -98,6 +100,9 @@ function getAllConnections(username) {
 // const onSubmitForm = async e => {
 //     e.preventDefault();
 //     try {
+//ES6 -> arrow functions
+//parameter => 
+//
 
 //   const contactTrace = ({username}) => {
 // //     const [myContactTrace, updateContactTrace] = useState(username)
@@ -159,6 +164,7 @@ function getAllConnections(username) {
       if (riskCheck === 1) {
         updateRisk(user);
       }
+      return notifications;
     //   notifications.forEach(function(item){
     //     //document.getElementById("notifications").innerHTML = document.getElementById("notifications").innerHTML + "<br>" + item + "<br>";
     //   }) //probably need to populate innerhtml w this
