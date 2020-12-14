@@ -4,7 +4,8 @@ import { Link, Redirect } from "react-router-dom";
 function compileDataArr(data) {
     let retArr = [];
     let i;
-    for (i = 0; i < count(data.rows); i++) {
+    let count = Object.keys(data).length;
+    for (i = 0; i < count; i++) {
         retArr.push(JSON.parse(data.rows[i]).user2);
     }
     return retArr;
@@ -98,11 +99,11 @@ function getAllConnections(username) {
 //     e.preventDefault();
 //     try {
 
-  const contactTrace = ({username}) => {
-//     const [myContactTrace, updateContactTrace] = useState(username)
-    const onSubmitForm = async e => {
-        e.preventDefault();
-        try {
+//   const contactTrace = ({username}) => {
+// //     const [myContactTrace, updateContactTrace] = useState(username)
+//     const onSubmitForm = async e => {
+//         e.preventDefault();
+//         try {
 
 
     function contactTrace(username){
