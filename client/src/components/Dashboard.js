@@ -43,7 +43,7 @@ const Dashboard = ({ setAuth }) => {
           headers: {
             "Content-type": "application/json"
           },
-          body: JSON.stringify({user1: localStorage.getItem("token")})
+          body: JSON.stringify({user1: localStorage.getItem("token"), homeuser: localStorage.getItem("token"), primuser: localStorage.getItem("token")})
         }
       );
       
