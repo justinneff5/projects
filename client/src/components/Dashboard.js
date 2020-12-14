@@ -8,7 +8,7 @@ const Dashboard = ({ setAuth }) => {
   const [name, setName] = useState("");
   const [status, setStatus] = useState("");
   const [risk, setRisk] = useState("");
-  //const [contacttrace, setContactTrace] = useState("");
+  //const [user, setContactTrace] = useState("");
 
   const getProfile = async () => {
     try {

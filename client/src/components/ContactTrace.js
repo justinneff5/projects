@@ -11,7 +11,8 @@ function compileDataArr(data) {
 }
 
 function compileDataStatus(data) {
-    let retStr = JSON.parse(data).status;
+    let retStr;
+    retStr = JSON.parse(data).status;
     return retStr;
 }
 
@@ -22,6 +23,7 @@ function compileDataStatus(data) {
 
 function getAllConnections(username) {
     let user = username;
+    let retDat;
     fetch('http://localhost:3001/authentication/getAllConnections', {
       method: 'POST',
       headers: {
@@ -39,6 +41,7 @@ function getAllConnections(username) {
 
   function getStatus(username) {
     let user = username;
+    let retDat;
     fetch('http://localhost:3001/authentication/getStatus', {
       method: 'POST',
       headers: {
@@ -95,11 +98,13 @@ function getAllConnections(username) {
 //     e.preventDefault();
 //     try {
 
-//   const contactTrace = ({updateContactTrace, username}) => {
+  const contactTrace = ({username}) => {
 //     const [myContactTrace, updateContactTrace] = useState(username)
-//     const onSubmitForm = async e => {
-//         e.preventDefault();
-//         try {
+    const onSubmitForm = async e => {
+        e.preventDefault();
+        try {
+
+
     function contactTrace(username){
       let user = username;
       let primary = [];
@@ -112,7 +117,7 @@ function getAllConnections(username) {
       let j;
       let k;
       
-      primary = getAllConnections(user);
+      primary = getAllConnections(user, user, user);
       for (i = 0; i < primary.length; i++){
         count++;
         secondary.length = 0; //resets second array
@@ -124,7 +129,7 @@ function getAllConnections(username) {
         //   notifications.push("You came in contact with " + primary[i] + " who is at risk of being positive for covid. You need to get tested!");
         //   riskCheck = 1;
         // }
-        secondary = getAllConnections(primary[i]);
+        secondary = getAllConnections(primary[i], user, primary[i]);
           for (j = 0; j < secondary.length; j++){
             count++;
             tertiary.length = 0; //resets tert array
@@ -136,7 +141,7 @@ function getAllConnections(username) {
             //   notifications.push("You came in secondary contact with " + secondary[j] + " who is at risk of being positive for covid. You need to get tested!");
             //   riskCheck = 1;
             // }
-            tertiary = getAllConnections(secondary[j]);
+            tertiary = getAllConnections(secondary[j], user, primary[i]);
               for (k = 0; k < tertiary.length; k++){
                 count++;
                 if (getStatus(tertiary[k]) === "positive") {
