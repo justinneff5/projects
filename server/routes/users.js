@@ -108,6 +108,15 @@ router.post("/getrisk", async (req, res) => {
     res.json(retStatus.rows[0]);
   }
   catch (err) {
+router.post("/risk", async (req, res) => {
+  const { username, risk } = req.body;
+  try {
+    const user = await pool.query("UPDATE users SET risk = $2 where username = $1",
+    [username, risk]
+    );
+    // res.json(user.rows[0]);
+      res.status(200).send("Test");
+  } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");
   }
