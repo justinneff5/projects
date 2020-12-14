@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Status from "./Status";
 import Risk from "./Risk";
+import ContactTrace from "./ContactTrace";
 // import { toast } from "react-toastify";
 
 const Dashboard = ({ setAuth }) => {
   const [name, setName] = useState("");
   const [status, setStatus] = useState("");
   const [risk, setRisk] = useState("");
+  //const [contacttrace, setContactTrace] = useState("");
 
   const getProfile = async () => {
     try {
@@ -26,6 +28,7 @@ const Dashboard = ({ setAuth }) => {
       setName(parseData.username);
       setStatus(parseData.status);
       setRisk(parseData.risk);
+      //setContactTrace(parseData.ContactTrace);
     } catch (err) {
       console.error(err.message);
     }
