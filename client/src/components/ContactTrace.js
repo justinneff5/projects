@@ -98,11 +98,11 @@ function getAllConnections(username) {
 //     e.preventDefault();
 //     try {
 
-  const contactTrace = ({username}) => {
-//     const [myContactTrace, updateContactTrace] = useState(username)
-    const onSubmitForm = async e => {
-        e.preventDefault();
-        try {
+//   const contactTrace = ({username}) => {
+// //     const [myContactTrace, updateContactTrace] = useState(username)
+//     const onSubmitForm = async e => {
+//         e.preventDefault();
+//         try {
 
 
     function contactTrace(username){

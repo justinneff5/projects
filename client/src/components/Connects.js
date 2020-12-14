@@ -6,7 +6,7 @@ import { Link, Redirect } from "react-router-dom";
 //refresh doesn't work
 
 const Connects = (updateConnects, connects) => {
-    const [myConnects, updateMyConnects] = useState(connects)
+    // const [myConnects, updateMyConnects] = useState(connects)
     const [inputs, setInputs] = useState({
         user1: "",
         user2: "",
@@ -53,9 +53,9 @@ const onSubmitFormA = async e => {
             body: JSON.stringify(body)
           }
         );
-        // if (response.status === 200) {
-        //   updateConnects(myConnects);
-        // }
+        if (response.status === 200) {
+          updateConnects(connects);
+        }
       } catch (err) {
         console.error(err.message);
       }

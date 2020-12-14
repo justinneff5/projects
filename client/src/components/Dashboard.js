@@ -3,7 +3,7 @@ import Status from "./Status";
 import Risk from "./Risk";
 import Connects from "./Connects";
 // import { parse } from "ipaddr.js";
-// import ContactTrace from "./ContactTrace";
+import ContactTrace from "./ContactTrace";
 // import { toast } from "react-toastify";
 
 const Dashboard = ({ setAuth }) => {
@@ -100,7 +100,8 @@ return (
       <br></br>
       <Risk updateRisk = {setRisk} risk = {risk}/>
       <Status updateStatus = {setStatus} status = {status}/>
-      <Connects updateConnects = {setStatus} connects = {connects}/>
+      <Connects updateConnects = {setConnects} connects = {connects}/>
+      {/* <ContactTrace updateContactTrace = {setContactTrace} contacttrace = {contacttrace}/> */}
       <button onClick={e => logout(e)} className="btn btn-primary">
         Logout
       </button>
