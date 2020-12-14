@@ -104,10 +104,16 @@ router.post("/getstatus", async (req, res) => {
 router.post("/getrisk", async (req, res) => {
   const { username } = req.body;
   try {
-    const retRisk = await pool.query("SELECT status from users where username = $1", [username]);
-    res.json(retStatus.rows[0]);
+    const retRisk = await pool.query("SELECT risk from users where username = $1", [username]);
+    res.json(retRisk.rows[0]);
   }
   catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
+
 router.post("/risk", async (req, res) => {
   const { username, risk } = req.body;
   try {
