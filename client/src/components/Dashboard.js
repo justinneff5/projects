@@ -49,12 +49,15 @@ const Dashboard = ({ setAuth }) => {
       
       //not converting to array properly
       const parseData = await res.json();
-      let obj = JSON.stringify(parseData);
-      console.log(obj);
+      let x = compileDataArr(parseData);
+      // console.log(parseData);
+      console.log(x);
+      // let obj = JSON.stringify(parseData);
+      // console.log(obj);
       // console.log(parseData);
       // console.log(obj.user2);
       // alert(obj.user2);
-      setConnects(obj);
+      setConnects(x);
     } catch (err) {
       console.error(err.message);
     }
@@ -85,6 +88,16 @@ const Dashboard = ({ setAuth }) => {
 //   return retArr;
 // }
   
+function compileDataArr(data) {
+  let retArr = [];
+  let i;
+  let count = Object.keys(data).length;
+  for (i = 0; i < count; i++) {
+      retArr.push((data[i].user2) + ", ");
+      }
+  return retArr;
+}
+
 return (
     <div>
       <h1 className="mt-5"><b>Dashboard</b></h1>
