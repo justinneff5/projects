@@ -15,10 +15,10 @@ function compileDataStatus(data) {
     return retStr;
 }
 
-function compileDataRisk(data) {
-    let retStr = JSON.parse(data).risk;
-    return retStr;
-}
+// function compileDataRisk(data) {
+//     let retStr = JSON.parse(data).risk;
+//     return retStr;
+// }
 
 function getAllConnections(username) {
     let user = username;
@@ -53,21 +53,21 @@ function getAllConnections(username) {
     });
 }
 
-  function getRisk(username){
-    let user = username;
-    fetch('http://localhost:3001/authentication/getRisk', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({user}),
-    })
-      .then(response => response.json())
-      .then(data => {
-        retDat = compileDataRisk(data);
-        return retDat;
-      });
-  }
+//   function getRisk(username){
+//     let user = username;
+//     fetch('http://localhost:3001/authentication/getRisk', {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify({user}),
+//     })
+//       .then(response => response.json())
+//       .then(data => {
+//         retDat = compileDataRisk(data);
+//         return retDat;
+//       });
+//   }
 
   function updateRisk(username) {
     let user = username;
@@ -120,10 +120,10 @@ function getAllConnections(username) {
           notifications.push("You came in contact with " + primary[i] + " who has tested positive for covid. You need to get tested!");
           riskCheck = 1;
         }
-        else if (getRisk(primary[i]) === "yes") {
-          notifications.push("You came in contact with " + primary[i] + " who is at risk of being positive for covid. You need to get tested!");
-          riskCheck = 1;
-        }
+        // else if (getRisk(primary[i]) === "yes") {
+        //   notifications.push("You came in contact with " + primary[i] + " who is at risk of being positive for covid. You need to get tested!");
+        //   riskCheck = 1;
+        // }
         secondary = getAllConnections(primary[i]);
           for (j = 0; j < secondary.length; j++){
             count++;
@@ -132,10 +132,10 @@ function getAllConnections(username) {
               notifications.push("You came in secondary contact with " + secondary[j] + " who has tested positive for covid. You need to get tested!");
               riskCheck = 1;
             }
-            else if (getRisk(secondary[j]) === "yes") {
-              notifications.push("You came in secondary contact with " + secondary[j] + " who is at risk of being positive for covid. You need to get tested!");
-              riskCheck = 1;
-            }
+            // else if (getRisk(secondary[j]) === "yes") {
+            //   notifications.push("You came in secondary contact with " + secondary[j] + " who is at risk of being positive for covid. You need to get tested!");
+            //   riskCheck = 1;
+            // }
             tertiary = getAllConnections(secondary[j]);
               for (k = 0; k < tertiary.length; k++){
                 count++;
@@ -143,10 +143,10 @@ function getAllConnections(username) {
                   notifications.push("You came in tertiary contact with " + secondary[j] + " who has tested positive for covid. You need to get tested!");
                   riskCheck = 1;
                 }
-                else if (getRisk(tertiary[k]) === "yes") {
-                  notifications.push("You came in tertiary contact with " + secondary[j] + " who is at risk of being positive for covid. You need to get tested!");
-                  riskCheck = 1;
-                }
+                // else if (getRisk(tertiary[k]) === "yes") {
+                //   notifications.push("You came in tertiary contact with " + secondary[j] + " who is at risk of being positive for covid. You need to get tested!");
+                //   riskCheck = 1;
+                // }
             }
         }
       }
