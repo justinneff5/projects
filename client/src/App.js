@@ -75,7 +75,6 @@ import Register from "./components/Register";
 import Dashboard from "./components/Dashboard";
 
 // toast.configure();
-
 function App() {
   // const checkAuthenticated = async () => {
   //   try {

@@ -3,6 +3,7 @@ import Status from "./Status";
 import Risk from "./Risk";
 import Connects from "./Connects";
 // import { parse } from "ipaddr.js";
+// import ContactTrace from "./ContactTrace";
 // import { toast } from "react-toastify";
 
 const Dashboard = ({ setAuth }) => {
@@ -10,6 +11,7 @@ const Dashboard = ({ setAuth }) => {
   const [status, setStatus] = useState("");
   const [risk, setRisk] = useState("");
   const [connects, setConnects] = useState("");
+  //const [user, setContactTrace] = useState("");
 
   const getProfile = async () => {
     try {
@@ -29,6 +31,7 @@ const Dashboard = ({ setAuth }) => {
       setName(parseData.username);
       setStatus(parseData.status);
       setRisk(parseData.risk);
+      //setContactTrace(parseData.ContactTrace);
     } catch (err) {
       console.error(err.message);
     }

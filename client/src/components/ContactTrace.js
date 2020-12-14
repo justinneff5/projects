@@ -1,5 +1,29 @@
+import React, { Fragment, useState } from "react";
+import { Link, Redirect } from "react-router-dom";
+
+function compileDataArr(data) {
+    let retArr = [];
+    let i;
+    for (i = 0; i < count(data.rows); i++) {
+        retArr.push(JSON.parse(data.rows[i]).user2);
+    }
+    return retArr;
+}
+
+function compileDataStatus(data) {
+    let retStr;
+    retStr = JSON.parse(data).status;
+    return retStr;
+}
+
+// function compileDataRisk(data) {
+//     let retStr = JSON.parse(data).risk;
+//     return retStr;
+// }
+
 function getAllConnections(username) {
     let user = username;
+    let retDat;
     fetch('http://localhost:3001/authentication/getAllConnections', {
       method: 'POST',
       headers: {
@@ -7,72 +31,82 @@ function getAllConnections(username) {
       },
       body: JSON.stringify({user}),
     })
-      .then(response => {
-        return response; 
-      })
-      .then(data => {
-        alert(data); 
-        //getUsers();
-        //return data;
-      });
-  }
+    .then(response => response.json())
+    .then(data => {
+        retDat = compileDataArr(data);
+        return retDat;
+      //getUsers();
+    });
+}
 
   function getStatus(username) {
     let user = username;
-    fetch('http://localhost:3001/authentication/getstatus', {
+    let retDat;
+    fetch('http://localhost:3001/authentication/getStatus', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({user}),
     })
-      .then(response => {
-        return response;
-      })
-      .then(data => {
-        alert(data);
-        //getUsers();
-      });
-  }
+    .then(response => response.json())
+    .then(data => {
+        retDat = compileDataStatus(data);
+        return retDat;
+    });
+}
 
-  function getRisk(username){
-    let user = username;
-    fetch('http://localhost:3001/authentication/risk', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({user}),
-    })
-      .then(response => {
-        return response;
-      })
-      .then(data => {
-        alert(data);
-        //getUsers();
-      });
-  }
+//   function getRisk(username){
+//     let user = username;
+//     fetch('http://localhost:3001/authentication/getRisk', {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify({user}),
+//     })
+//       .then(response => response.json())
+//       .then(data => {
+//         retDat = compileDataRisk(data);
+//         return retDat;
+//       });
+//   }
 
   function updateRisk(username) {
     let user = username;
-    fetch('http://localhost:3001/updaterisk', {
+    fetch('http://localhost:3001/risk', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({user}),
     })
-      .then(response => {
-        return response;
-      })
-      .then(data => {
-        alert(data);
-        //getUsers();
-      });
-  }
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+      //getUsers();
+    });
+}
 
-  function contactTrace(username) {
-      let user = "justin";
+
+
+// import { toast } from "react-toastify";
+
+// const Status = ({updateStatus, status}) => {
+// const [myStatus, updateMyStatus] = useState(status)
+// const onSubmitForm = async e => {
+//     e.preventDefault();
+//     try {
+
+  const contactTrace = ({username}) => {
+//     const [myContactTrace, updateContactTrace] = useState(username)
+    const onSubmitForm = async e => {
+        e.preventDefault();
+        try {
+
+
+    function contactTrace(username){
+      let user = username;
       let primary = [];
       let secondary = [];
       let tertiary = [];
@@ -83,48 +117,78 @@ function getAllConnections(username) {
       let j;
       let k;
       
-      primary = getAllConnections(user);
+      primary = getAllConnections(user, user, user);
       for (i = 0; i < primary.length; i++){
         count++;
         secondary.length = 0; //resets second array
-        if (getStatus(primary[i]) == "positive") {
+        if (getStatus(primary[i]) === "positive") {
           notifications.push("You came in contact with " + primary[i] + " who has tested positive for covid. You need to get tested!");
           riskCheck = 1;
         }
-        else if (getRisk(primary[i]) == "yes") {
-          notifications.push("You came in contact with " + primary[i] + " who is at risk of being positive for covid. You need to get tested!");
-          riskCheck = 1;
-        }
-        secondary = getAllConnections(primary[i]);
+        // else if (getRisk(primary[i]) === "yes") {
+        //   notifications.push("You came in contact with " + primary[i] + " who is at risk of being positive for covid. You need to get tested!");
+        //   riskCheck = 1;
+        // }
+        secondary = getAllConnections(primary[i], user, primary[i]);
           for (j = 0; j < secondary.length; j++){
             count++;
             tertiary.length = 0; //resets tert array
-            if (getStatus(secondary[j]) == "positive") {
+            if (getStatus(secondary[j]) === "positive") {
               notifications.push("You came in secondary contact with " + secondary[j] + " who has tested positive for covid. You need to get tested!");
               riskCheck = 1;
             }
-            else if (getRisk(secondary[j]) == "yes") {
-              notifications.push("You came in secondary contact with " + secondary[j] + " who is at risk of being positive for covid. You need to get tested!");
-              riskCheck = 1;
-            }
-            tertiary = getAllConnections(secondary[j]);
+            // else if (getRisk(secondary[j]) === "yes") {
+            //   notifications.push("You came in secondary contact with " + secondary[j] + " who is at risk of being positive for covid. You need to get tested!");
+            //   riskCheck = 1;
+            // }
+            tertiary = getAllConnections(secondary[j], user, primary[i]);
               for (k = 0; k < tertiary.length; k++){
                 count++;
-                if (getStatus(tertiary[k]) == "positive") {
+                if (getStatus(tertiary[k]) === "positive") {
                   notifications.push("You came in tertiary contact with " + secondary[j] + " who has tested positive for covid. You need to get tested!");
                   riskCheck = 1;
                 }
-                else if (getRisk(tertiary[k]) == "yes") {
-                  notifications.push("You came in tertiary contact with " + secondary[j] + " who is at risk of being positive for covid. You need to get tested!");
-                  riskCheck = 1;
-                }
+                // else if (getRisk(tertiary[k]) === "yes") {
+                //   notifications.push("You came in tertiary contact with " + secondary[j] + " who is at risk of being positive for covid. You need to get tested!");
+                //   riskCheck = 1;
+                // }
             }
         }
       }
-      if (riskCheck == 1) {
+      if (riskCheck === 1) {
         updateRisk(user);
       }
-      notifications.forEach(function(item){
-        alert(item);
-      }) //probably need to populate innerhtml w this
+    //   notifications.forEach(function(item){
+    //     //document.getElementById("notifications").innerHTML = document.getElementById("notifications").innerHTML + "<br>" + item + "<br>";
+    //   }) //probably need to populate innerhtml w this
+
+    
+
+
+    // return (
+    //     <Fragment>
+    //       <h3 className="mt-5">Contact Trace</h3>
+    //       <form onSubmit={onSubmitForm}>
+    //         <input
+    //           type="radio"
+    //           checked = {myStatus === "positive"}
+    //           name="positive"
+    //           value="positive"
+    //           onChange={e => updateMyStatus("positive")}
+    //           className="form-control my-3"
+    //         /> Positive
+    //         <input
+    //           type="radio"
+    //           checked = {myStatus === "negative"}
+    //           name="negative"
+    //           value="negative"
+    //           onChange={e => updateMyStatus("negative")}
+    //           className="form-control my-3"
+    //         /> Negative
+    //         <button className="btn btn-success btn-block">Submit</button>
+    //       </form>
+    //     </Fragment>
+    //   );
   }
+
+ //document.getElementById("contacttrace").addEventListener("click", contactTrace, false);
