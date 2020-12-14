@@ -3,7 +3,7 @@ import Status from "./Status";
 import Risk from "./Risk";
 import Connects from "./Connects";
 // import { parse } from "ipaddr.js";
-// import ContactTrace from "./ContactTrace";
+import ContactTrace from "./ContactTrace";
 // import { toast } from "react-toastify";
 
 const Dashboard = ({ setAuth }) => {
@@ -49,12 +49,15 @@ const Dashboard = ({ setAuth }) => {
       
       //not converting to array properly
       const parseData = await res.json();
-      let obj = JSON.stringify(parseData);
-      console.log(obj);
+      let x = compileDataArr(parseData);
+      // console.log(parseData);
+      console.log(x);
+      // let obj = JSON.stringify(parseData);
+      // console.log(obj);
       // console.log(parseData);
       // console.log(obj.user2);
       // alert(obj.user2);
-      setConnects(obj);
+      setConnects(x);
     } catch (err) {
       console.error(err.message);
     }
@@ -85,6 +88,16 @@ const Dashboard = ({ setAuth }) => {
 //   return retArr;
 // }
   
+function compileDataArr(data) {
+  let retArr = [];
+  let i;
+  let count = Object.keys(data).length;
+  for (i = 0; i < count; i++) {
+      retArr.push((data[i].user2) + ", ");
+      }
+  return retArr;
+}
+
 return (
     <div>
       <h1 className="mt-5"><b>Dashboard</b></h1>
@@ -100,7 +113,8 @@ return (
       <br></br>
       <Risk updateRisk = {setRisk} risk = {risk}/>
       <Status updateStatus = {setStatus} status = {status}/>
-      <Connects updateConnects = {setStatus} connects = {connects}/>
+      <Connects updateConnects = {setConnects} connects = {connects}/>
+      {/* <ContactTrace updateContactTrace = {setContactTrace} contacttrace = {contacttrace}/> */}
       <button onClick={e => logout(e)} className="btn btn-primary">
         Logout
       </button>
