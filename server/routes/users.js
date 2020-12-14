@@ -24,7 +24,6 @@ router.post("/register", async (req, res) => {
       [username, bcryptPassword]
     );
 
-
     res.json(newUser.rows[0]);
   } catch (err) {
     console.error(err.message);

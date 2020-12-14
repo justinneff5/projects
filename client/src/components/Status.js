@@ -19,22 +19,9 @@ const onSubmitForm = async e => {
           body: JSON.stringify(body)
         }
       );
-      // const parseRes = await response.json();
-      // setAuth(true);
       if (response.status === 200) {
         updateStatus(myStatus);
       }
-      // const parseRes = await response.json();
-      // console.log(parseRes);
-
-      // if (parseRes.jwtToken) {
-      //   localStorage.setItem("token", parseRes.jwtToken);
-      //   setAuth(true);
-      //   toast.success("Logged in Successfully");
-      // } else {
-      //   setAuth(false);
-      //   toast.error(parseRes);
-      // }
     } catch (err) {
       console.error(err.message);
     }
@@ -51,7 +38,8 @@ const onSubmitForm = async e => {
           value="positive"
           onChange={e => updateMyStatus("positive")}
           className="form-control my-3"
-        /> Positive
+        />
+        Positive
         <input
           type="radio"
           checked = {myStatus === "negative"}
@@ -59,7 +47,8 @@ const onSubmitForm = async e => {
           value="negative"
           onChange={e => updateMyStatus("negative")}
           className="form-control my-3"
-        /> Negative
+        />
+        Negative
         <button className="btn btn-success btn-block">Submit</button>
       </form>
     </Fragment>

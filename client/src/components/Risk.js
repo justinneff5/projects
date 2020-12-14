@@ -46,21 +46,49 @@ const onSubmitForm = async e => {
       <form onSubmit={onSubmitForm}>
         <input
           type="checkbox"
-          checked = {myRisk === "some "}
+          checked = {myRisk === "some"}
           name="fever"
           value="fever"
-          onChange={e => updateMyRisk("some ")}
+          onChange={e => updateMyRisk("some")}
           className="form-control my-3"
         /> Feel like you have had a fever?
         <input
           type="checkbox"
-          checked = {myRisk === "some"}
           name="chills"
           value="chills"
-          onChange={e => updateMyRisk("some")}
           className="form-control my-3"
         /> Chills?
+          <input
+          type="checkbox"
+          name="ache"
+          value="ache"
+          className="form-control my-3"
+        /> Unexplained muscle pain/body aches?
+          <input
+          type="checkbox"
+          // checked = {myRisk === "some"}
+          name="cough"
+          value="cough"
+          // onChange={e => updateMyRisk("some")}
+          className="form-control my-3"
+        /> New or worsening cough?
         <input
+          type="checkbox"
+          // checked = {myRisk === "low"}
+          name="low"
+          value="low"
+          // onChange={e => updateMyRisk("low")}
+          className="form-control my-3"
+        /> Trouble breathing?
+          <input
+          type="checkbox"
+          // checked = {myRisk === "low"}
+          name="low"
+          value="low"
+          // onChange={e => updateMyRisk("low")}
+          className="form-control my-3"
+        /> New loss of sense of taste or sense of smell?
+          <input
           type="checkbox"
           checked = {myRisk === "low"}
           name="low"
