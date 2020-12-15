@@ -119,6 +119,8 @@ return (
       <br></br>
       <ContactTrace updateContactTrace = {traces}/>
       <br></br>
+      <CheckUser updateCheckUser/>
+      <br></br>
       <Risk updateRisk = {setRisk} risk = {risk}/>
       <Status updateStatus = {setStatus} status = {status}/>
       <Connects updateConnects = {setConnects} connects = {connects}/>
