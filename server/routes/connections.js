@@ -65,11 +65,10 @@ router.post("/getAllConnections", async (req, res) => {
   });
 
   router.post("/cacheDatabase", async (req, res) => {
-    const {status} = req.body;
+    //const {status} = req.body;
     try {
       const cache = await pool.query(
-        "Select * from connections WHERE user2status = $1",
-        [status]
+        "Select * from connections"
       );
       // res.status(200).send("Test");
       res.json(cache.rows);
