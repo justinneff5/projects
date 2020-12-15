@@ -47,16 +47,8 @@ const Dashboard = ({ setAuth }) => {
         }
       );
       
-      //not converting to array properly
       const parseData = await res.json();
       let x = compileDataArr(parseData);
-      // console.log(parseData);
-      console.log(x);
-      // let obj = JSON.stringify(parseData);
-      // console.log(obj);
-      // console.log(parseData);
-      // console.log(obj.user2);
-      // alert(obj.user2);
       setConnects(x);
     } catch (err) {
       console.error(err.message);
@@ -68,7 +60,6 @@ const Dashboard = ({ setAuth }) => {
     try {
       localStorage.removeItem("token");
       setAuth(false);
-    //   toast.success("Logout successfully");
     } catch (err) {
       console.error(err.message);
     }
@@ -77,16 +68,6 @@ const Dashboard = ({ setAuth }) => {
   useEffect(() => {
     getProfile();
   }, []);
-
-// function compileDataArr(data) {
-//   let retArr = [];
-//   let i;
-//   let count = Object.keys(data).length;
-//   for (i = 0; i < count; i++) {
-//       retArr.push(JSON.parse(data.rows[i]).user2);
-//   }
-//   return retArr;
-// }
   
 function compileDataArr(data) {
   let retArr = [];

@@ -28,8 +28,6 @@ const Login = ({ setAuth }) => {
           body: JSON.stringify(body)
         }
       );
-      // const parseRes = await response.json();
-      // setAuth(true);
       if (response.status == 200) {
         const parseRes = await response.json();
         setAuth(true);
