@@ -48,7 +48,6 @@ const Dashboard = ({ setAuth }) => {
         }
       );
       
-      //not converting to array properly
       const parseData = await res.json();
       let x = compileDataArr(parseData);
       // console.log(parseData);
@@ -84,7 +83,6 @@ const Dashboard = ({ setAuth }) => {
     try {
       localStorage.removeItem("token");
       setAuth(false);
-    //   toast.success("Logout successfully");
     } catch (err) {
       console.error(err.message);
     }
@@ -93,16 +91,6 @@ const Dashboard = ({ setAuth }) => {
   useEffect(() => {
     getProfile();
   }, []);
-
-// function compileDataArr(data) {
-//   let retArr = [];
-//   let i;
-//   let count = Object.keys(data).length;
-//   for (i = 0; i < count; i++) {
-//       retArr.push(JSON.parse(data.rows[i]).user2);
-//   }
-//   return retArr;
-// }
   
 function compileDataArr(data) {
   let retArr = [];
@@ -128,10 +116,12 @@ return (
       <br></br>
       <h2>Active Contacts: {connects}</h2>
       <br></br>
+      <ContactTrace updateContactTrace = {traces}/>
+      <br></br>
       <Risk updateRisk = {setRisk} risk = {risk}/>
       <Status updateStatus = {setStatus} status = {status}/>
       <Connects updateConnects = {setConnects} connects = {connects}/>
-      <ContactTrace updateContactTrace = {traces}/>
+      <br></br>
       {/* <button onClick={e => Trace(e)} className="btn btn-primary"></button> */}
       <button onClick={e => logout(e)} className="btn btn-primary">
         Logout

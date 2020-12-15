@@ -19,9 +19,11 @@ router.post("/register", async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const bcryptPassword = await bcrypt.hash(password, salt);
 
+    let x = "negative";
+    
     let newUser = await pool.query(
-      "INSERT INTO users (username, password) VALUES ($1, $2) RETURNING *",
-      [username, bcryptPassword]
+      "INSERT INTO users (username, password, status) VALUES ($1, $2, $3) RETURNING *",
+      [username, bcryptPassword, x]
     );
 
     res.json(newUser.rows[0]);
@@ -78,6 +80,10 @@ router.post("/status", async (req, res) => {
   const { username, status } = req.body;
   try {
     const user = await pool.query("UPDATE users SET status = $2 where username = $1",
+    [username, status]
+    );
+
+    const random = await pool.query("UPDATE connections SET user2status = $2 where user2 = $1",
     [username, status]
     );
     // res.json(user.rows[0]);
