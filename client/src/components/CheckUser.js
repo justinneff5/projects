@@ -171,10 +171,10 @@ const getStatus = async(username) => {
   const CheckUser = () => {
     const [notif, setNotif] = useState([]);
     const [inputs, setInputs] = useState({
-      updateCheckUser: "",
+      updateCheckUser: ""
     });
     
-    const { updateCheckUser } = inputs;
+    const {updateCheckUser} = inputs;
     
     const onChange = e =>
     setInputs({ ...inputs, [e.target.name]: e.target.value });
@@ -193,16 +193,16 @@ const getStatus = async(username) => {
           </div>
           {/* <button className = "btn btn-success btn-block" onClick = {onSubmitForm}> Check User! </button> */}
           <form onSubmit={onSubmitForm}>
-        <input
-        type="text"
-        name="checkUser"
-        value={updateCheckUser}
-        placeholder="username"
-        onChange={e => onChange(e)}
-        className="form-control my-3"
-      />
-      <button className="btn btn-success btn-block">Submit</button>
-    </form>
+            <input
+              type="text"
+              name="updateCheckUser"
+              value={updateCheckUser}
+              placeholder="username"
+              onChange={e => onChange(e)}
+              className="form-control my-3"
+            />
+            <button className="btn btn-success btn-block">Submit</button>
+          </form>
         </div>
         
       </Fragment>
