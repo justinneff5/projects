@@ -24,14 +24,14 @@ function compileDataArr(data) { //take second parameter x username
 const getCache = async() => {
   // function getCache(){
     try {
-      let u2status = "positive"; // change back to positive
+      //let u2status = "positive"; // change back to positive
       let x;
       const res = await fetch('http://localhost:3001/other/cacheDatabase', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({status : u2status}),
+        body: JSON.stringify({}),
       });
 
       const r = await res.json();
@@ -78,7 +78,7 @@ const getCache = async() => {
       body: JSON.stringify({username : user, risk : riskStatus}),
     })
     .then(data => {
-      console.log(data);
+      //console.log(data);
       //getUsers();
     });
   }
@@ -101,13 +101,13 @@ const getCache = async() => {
       str = "Wow! You have 0 connections. Great job, you are being very safe!";
     }
     else if (num < 20 && num > 0) {
-      str = "! You have " + num + " connections to the tertiary level. You're being relatively safe. Your network status is yellow!";
+      str = "Your network status is yellow! You have " + num + " connections to the tertiary level. You're being relatively safe.";
     }
-    else if (num > 20 && num < 40) {
-      str = "!! You have " + num + " connections to the tertiary level. You're being pretty unsafe. Try to cut down on social interactions a bit, or talk to the people you see about being safer. Your network status is orange";
+    else if (num >= 20 && num < 40) {
+      str = "  Your network status is orange! You have " + num + " connections to the tertiary level. You're being pretty unsafe.";
     }
     else {
-      str = "!!! You have " + num + " connections to the tertiary level. You're being very unsafe. Try to cut down on social interactions a lot, or talk to the people you see about being MUCH safer. Your network status is red";
+      str = " Your network status is red! You have " + num + " connections to the tertiary level.";
     }
     if (pos === 0) {
       str += " However, you have not come into contact with a positive user.";
@@ -143,6 +143,7 @@ const getCache = async() => {
             riskCheck = 1;
           }
         }
+        console.log(primary);
         
       }
       for (i = 0; i < cache.length; i++) { //set up secondary connections
@@ -205,7 +206,7 @@ const getCache = async() => {
             {/* {notif.forEach(function(x){
               return <li> {x} </li>; //should return html elements
             }) */}
-            {notif.map((x) => x)}
+            {notif.map((x) => <li key = "{x}">{x}</li>)}
           </div>
           <button className = "btn btn-success btn-block" onClick = {onSubmitForm}> Contact Trace! </button>
         </div>
