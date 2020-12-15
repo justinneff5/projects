@@ -96,6 +96,38 @@ router.post("/getAllConnections", async (req, res) => {
       res.status(500).send("Server error");
     }
   });
+
+  router.post("/cacheDatabase", async (req, res) => {
+    const {status} = req.body;
+    try {
+      const cache = await pool.query(
+        "Select * from connections WHERE user2status = $1",
+        [status]
+      );
+      // res.status(200).send("Test");
+      res.json(cache.rows);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server error");
+    }
+  });
+
+  router.post("/updateU2status", async (req, res) => {
+    const {user, userStatus} = req.body;
+    try {
+      let cache = await pool.query(
+        "update connections set user2status = $1 where user2 = $2",
+        [user, userStatus]
+      );
+      // res.status(200).send("Test");
+      res.json(cache.rows);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server error");
+    }
+  });
+
+
   
 
 

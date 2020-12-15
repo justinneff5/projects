@@ -11,7 +11,7 @@ const Dashboard = ({ setAuth }) => {
   const [status, setStatus] = useState("");
   const [risk, setRisk] = useState("");
   const [connects, setConnects] = useState("");
-  //const [user, setContactTrace] = useState("");
+  //const [traces, setContactTrace] = useState("");
 
   const getProfile = async () => {
     try {
@@ -31,6 +31,7 @@ const Dashboard = ({ setAuth }) => {
       setName(parseData.username);
       setStatus(parseData.status);
       setRisk(parseData.risk);
+      //setContactTrace(parseData.username);
       //setContactTrace(parseData.ContactTrace);
     } catch (err) {
       console.error(err.message);
@@ -49,11 +50,33 @@ const Dashboard = ({ setAuth }) => {
       
       const parseData = await res.json();
       let x = compileDataArr(parseData);
+      // console.log(parseData);
+      //console.log(x);
+      // let obj = JSON.stringify(parseData);
+      // console.log(obj);
+      // console.log(parseData);
+      // console.log(obj.user2);
+      // alert(obj.user2);
       setConnects(x);
     } catch (err) {
       console.error(err.message);
     }
+
+
+    
   };
+
+  // const Trace = async e => {
+  //   e.preventDefault();
+  //   let notif = null;
+  //   try {
+  //     notif = contactTrace(localStorage.getItem("token"));
+  //     setContactTrace(notif);
+  //   //   toast.success("Logout successfully");
+  //   } catch (err) {
+  //     console.error(err.message);
+  //   }
+  // };
 
   const logout = async e => {
     e.preventDefault();
@@ -78,6 +101,7 @@ function compileDataArr(data) {
       }
   return retArr;
 }
+const traces = localStorage.getItem("token");
 
 return (
     <div>
@@ -95,7 +119,8 @@ return (
       <Risk updateRisk = {setRisk} risk = {risk}/>
       <Status updateStatus = {setStatus} status = {status}/>
       <Connects updateConnects = {setConnects} connects = {connects}/>
-      {/* <ContactTrace updateContactTrace = {setContactTrace} contacttrace = {contacttrace}/> */}
+      <ContactTrace updateContactTrace = {traces}/>
+      {/* <button onClick={e => Trace(e)} className="btn btn-primary"></button> */}
       <button onClick={e => logout(e)} className="btn btn-primary">
         Logout
       </button>
