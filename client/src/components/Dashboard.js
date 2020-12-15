@@ -116,10 +116,12 @@ return (
       <br></br>
       <h2>Active Contacts: {connects}</h2>
       <br></br>
+      <ContactTrace updateContactTrace = {traces}/>
+      <br></br>
       <Risk updateRisk = {setRisk} risk = {risk}/>
       <Status updateStatus = {setStatus} status = {status}/>
       <Connects updateConnects = {setConnects} connects = {connects}/>
-      <ContactTrace updateContactTrace = {traces}/>
+      <br></br>
       {/* <button onClick={e => Trace(e)} className="btn btn-primary"></button> */}
       <button onClick={e => logout(e)} className="btn btn-primary">
         Logout

@@ -135,7 +135,7 @@ const getCache = async() => {
 
       for (i = 0; i < cache.length; i++) { //set up primary connections
         //console.log()
-        if(cache[i].user1 === user) { //all conn where main user is user1
+        if(cache[i].user1 === user && cache[i].user2 != user) { //all conn where main user is user1
           primary.push(cache[i].user2);
           count++;
           if (cache[i].user2status === "positive") {
@@ -148,7 +148,7 @@ const getCache = async() => {
       }
       for (i = 0; i < cache.length; i++) { //set up secondary connections
         for (j = 0; j < primary.length; j++) { //all conn where primary connection is user1
-          if(cache[i].user1 === primary[j] && primary[j] != user) {
+          if(cache[i].user1 === primary[j] && primary[j] != user && cache[i].user2 != user) {
             secondary.push(cache[i].user2);
             count++;
             if (cache[i].user2status === "positive") {
@@ -161,7 +161,7 @@ const getCache = async() => {
 
       for (i = 0; i < cache.length; i++) { //set up tertiary connections
         for (j = 0; j < secondary.length; j++) { 
-          if(cache[i].user1 === secondary[j] && secondary[j] != user) {
+          if(cache[i].user1 === secondary[j] && secondary[j] != user && cache[i].user2 != user) {
             count++;
             if (cache[i].user2status === "positive") {
               notifications.push("You came in tertiary contact with " + cache[i].user2 + " who has tested positive for covid. You need to get tested!");
