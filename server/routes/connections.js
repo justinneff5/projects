@@ -18,20 +18,7 @@ router.post("/getAllConnections", async (req, res) => {
   router.post("/add", async (req, res) => {
     const { user1, user2 } = req.body;
   
-    try {
-      // const user = await pool.query("SELECT user1 FROM connections WHERE user2 = $1", [
-      //   user1
-      // ]);
-
-      // user = x;
-
-      // if (user.rows.length > 0) {
-      //   let random = await pool.query(
-      //   "INSERT INTO connections (user1, user2) VALUES ($1, $2) RETURNING *",
-      //   [user1, x]
-      //   );
-      // }
-      
+    try {      
       let newUser = await pool.query(
         "INSERT INTO connections (user1, user2) VALUES ($1, $2) RETURNING *",
         // "INSERT INTO connections (user2status) SELECT status FROM users where username = $2",
@@ -44,12 +31,6 @@ router.post("/getAllConnections", async (req, res) => {
         [user1, user2]
       );
 
-
-      // let check = await pool.query(
-      //   "INSERT INTO connections (user2status) VALUES ($1)",
-      //   // "INSERT INTO connections (user2status) SELECT status FROM users where username = $1",
-      //   [random]
-      // );
       res.status(200).send("Test");
       // res.json(newUser.rows[0]);
     } catch (err) {
@@ -127,7 +108,4 @@ router.post("/getAllConnections", async (req, res) => {
   });
 
 
-  
-
-
-module.exports = router;
+  module.exports = router;

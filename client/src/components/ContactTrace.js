@@ -35,34 +35,13 @@ const getCache = async() => {
       });
 
       const r = await res.json();
-      //console.log(r);
       x = compileDataArr(r);
       console.log(x);
       return x;
-      //Promise.resolve(x);
-      // store(x);
-      //console.log(x[0].user1);
-      //return x;
-      // if (res.status === 200) {
-      //   console.log("sup");
-      // }
-      //this.setState({Cache: x});
     }
     catch (err) {
        console.error(err.message);
     }
-    //return getCache();
-    
-    // .then(response => response.json())
-    // .then(data => {
-    //     x = compileDataArr(data);
-    //     console.log(data);
-    //     console.log(x);
-        //return getCache;
-        //return retDat;
-        // retDat = await res.json();
-        // dat = compileDataArr(retDat);
-        // return dat;
 }
 
 
@@ -85,16 +64,6 @@ const getCache = async() => {
 
 
 
-// import { toast } from "react-toastify";
-
-// const Status = ({updateStatus, status}) => {
-// const [myStatus, updateMyStatus] = useState(status)
-// const onSubmitForm = async e => {
-//     e.preventDefault();
-//     try {
-//ES6 -> arrow functions
-//parameter => 
-//
   function networkStatus(num, pos) {
     let str;
     if (num == 0) {
@@ -186,8 +155,6 @@ const getCache = async() => {
   //look at documentation to set state to notif
 
   const ContactTrace = ({updateContactTrace}) => {
-    //const [myContactTrace, updateContactTrace] = useState(username)
-    //use setState if this doesn't work
     const [notif, setNotif] = useState([]);
     //const [retDat, setRetDat] = useState([]);
       const onSubmitForm = async e => {
@@ -199,13 +166,9 @@ const getCache = async() => {
           console.log(notif);
       }
     return (
-      //html here
       <Fragment>
         <div className = "CT">
           <div className = "populated">
-            {/* {notif.forEach(function(x){
-              return <li> {x} </li>; //should return html elements
-            }) */}
             {notif.map((x) => <li key = "{x}">{x}</li>)}
           </div>
           <button className = "btn btn-success btn-block" onClick = {onSubmitForm}> Contact Trace! </button>

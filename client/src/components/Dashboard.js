@@ -4,6 +4,7 @@ import Risk from "./Risk";
 import Connects from "./Connects";
 // import { parse } from "ipaddr.js";
 import ContactTrace from "./ContactTrace";
+import CheckUser from "./CheckUser";
 // import { toast } from "react-toastify";
 
 const Dashboard = ({ setAuth }) => {
@@ -109,8 +110,8 @@ return (
       <br></br>
       <h2>Welcome, {name}!</h2>
       <br></br>
-      <h2>Based off of your current symptoms, this is your risk of COVID: {risk} </h2>
-      <h3>If your risk isn't low, consider getting tested!</h3>
+      <h2>Based off of current symptoms and exposure, this is your risk of COVID: {risk} </h2>
+      <h3>If your have some risk, consider getting tested!</h3>
       <br></br>
       <h2>Current COVID Status: {status}</h2>
       <br></br>
