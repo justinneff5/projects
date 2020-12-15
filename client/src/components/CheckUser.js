@@ -86,8 +86,8 @@ const getStatus = async(username) => {
     return str;
   }
 
-  function positiveContact() {
-      let str = "This user has come into contact with a COVID positive user. They are extremely unsafe to see.";
+  function positiveContact(user) {
+      let str = user + " has come into contact with a COVID positive user. They are extremely unsafe to see.";
       return str;
   }
 
@@ -96,7 +96,7 @@ const getStatus = async(username) => {
       let status = await getStatus(user);
       let notifications = [];
       if (status === "positive") {
-          notifications.push("This user is COVID positive. Under no condition should you see them.")
+          notifications.push(user + " is COVID positive. Under no condition should you see them.")
       }
       else {
         let cache = await getCache();
@@ -143,21 +143,21 @@ const getStatus = async(username) => {
         let str;
         if (notifications.length > 0) {
             notifications.length = 0; //resets notifs to remove fillers
-            str = positiveContact();
+            str = positiveContact(user);
         }
         else {
             let network = networkStatus(count);
             if (network === "Isolated") {
-                str = "This user has no contacts with positive users and has no connections. They are very safe to see";
+                str = user + " has no contacts with positive users and has no connections. They are very safe to see.";
             }
             else if (network === "Yellow") {
-                str = "This user has no contacts with positive users and has a relatively small netword of connections. They are fairly safe to see";
+                str = user + " has no contacts with positive users and has a relatively small (yellow status) network of connections. They are fairly safe to see.";
             }
             else if (network === "Orange") {
-                str = "This user has no contacts with positive users and has a relatively extensive network of connection. They are probably safe to see";
+                str = user + " has no contacts with positive users and has a relatively extensive (orange status) network of connection. They are probably safe to see.";
             }
             else if (network === "Red"){
-                str = "This user has no contacts with positive users but has a very extensive network of connection. They are probably not safe to see";
+                str = user + " has no contacts with positive users but has a very extensive (red status) network of connection. They are probably not safe to see.";
             }
         }
         notifications.length = 0; 
@@ -201,7 +201,7 @@ const getStatus = async(username) => {
               onChange={e => onChange(e)}
               className="form-control my-3"
             />
-            <button className="btn btn-success btn-block">Submit</button>
+            <button className="btn btn-success btn-block">Check User Contact Safety!</button>
           </form>
         </div>
         
