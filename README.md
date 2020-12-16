@@ -39,3 +39,7 @@ Code is readable and well formatted (3 points)
 All pages pass the html validator (2 points)
 
 # Creative Portion (10 points)
+
+1. We added a "Check User Safety" button, which upon input of any user within the network tabulated in our app, will check the COVID-status of said user as well as determine their network safety and display this information on the page. This could be useful to run before seing a user. (7 points)
+
+2. We created a "Risk" attribute that assigns to every user that's based off of two components: the logged symptoms by a user as well as their COVID network status that is determined after contact tracing is applied. For example, a user's risk will be elevated if contact tracing determines that they have a connection to a COVID-positive user. (3 points)
